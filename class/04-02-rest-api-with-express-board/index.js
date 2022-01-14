@@ -12,7 +12,7 @@ app.get('/boards', function (req, res) {
   ]);
 });
 
-// 요청방식만 바꾸고 이름(엔드라인)은 같게 : restfull하다.
+// 요청방식만 바꾸고 이름(엔드라인)은 같게 : restful하다.
 app.post('/boards', function (req, res) {
   // 데이터를 등록하는 로직 => DB에다 저장함
   // console.log(req);
