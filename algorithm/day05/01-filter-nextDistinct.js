@@ -1,5 +1,5 @@
 function solution(arr) {
-  return arr.filter((el, id) => el !== arr[id + 1]);
+  return arr.filter((e, i) => e !== arr[i + 1]);
 }
 
 const a = [1, 1, 3, 3, 0, 1];
