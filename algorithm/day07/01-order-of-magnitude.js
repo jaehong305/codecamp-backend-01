@@ -1,8 +1,7 @@
 function solution(n) {
   return String(n)
     .split('')
-    .map(e => +e)
-    .reduce((a, c) => a + c);
+    .reduce((a, c) => a + c / 1, 0);
 }
 
 solution(123); // 6

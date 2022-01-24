@@ -1,11 +1,8 @@
 function solution(array, commands) {
-  const arr = [];
-  commands.forEach(e => {
+  return commands.map(e => {
     const [i, j, k] = e;
-    const a = array.slice(i - 1, j).sort((p, c) => p - c)[k - 1];
-    arr.push(a);
+    return array.slice(i - 1, j).sort((p, c) => p - c)[k - 1];
   });
-  return arr;
 }
 
 solution(
@@ -16,3 +13,9 @@ solution(
     [1, 7, 3],
   ]
 ); // [5, 6, 3]
+
+function solution2(array, commands) {
+  return commands.map(e => {
+    return array.slice(e[0] - 1, e[1]).sort((p, c) => p - c)[e[2] - 1];
+  });
+}

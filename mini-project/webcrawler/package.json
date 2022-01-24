@@ -1,0 +1,14 @@
+{
+  "name": "09-03-puppeteer-crawling-iflame",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "dev": "node index.js"
+  },
+  "dependencies": {
+    "mongoose": "^6.1.7",
+    "puppeteer": "^13.1.1"
+  }
+}
