@@ -1,0 +1,73 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type MainCategory {
+  id: String!
+  name: String!
+}
+
+type CatDetail {
+  id: Int!
+}
+
+type Cat {
+  id: Int!
+  name: String!
+  intro: String!
+  history: String!
+  products: [Product!]!
+  catDetail: CatDetail!
+}
+
+type Product {
+  id: Int!
+  name: String!
+  description: String!
+  price: Int!
+  isWet: Boolean!
+  quantity: Int!
+  deletedAt: DateTime
+  mainCategory: MainCategory!
+  cats: [Cat!]!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Query {
+  fetchProducts: [Product!]!
+  fetchProductsAll: [Product!]!
+  fetchProduct(productId: Float!): Product!
+  fetchMainCategorys: [MainCategory!]!
+  fetchMainCategory(mainCategoryId: String!): MainCategory!
+}
+
+type Mutation {
+  createProduct(createProductInput: CreateProductInput!): Product!
+  updateProduct(updateProductInput: UpdateProductInput!, productId: Float!): Product!
+  deleteProduct(productId: String!): Boolean!
+  restoreProduct(productId: String!): Boolean!
+  createMainCategory(name: String!): MainCategory!
+  updateMainCategory(updateName: String!, mainCategoryId: String!): String!
+  deleteMainCategory(mainCategoryId: String!): Boolean!
+}
+
+input CreateProductInput {
+  name: String!
+  description: String!
+  price: Int!
+  quantity: Int!
+  isWet: Boolean!
+  mainCategoryId: String!
+}
+
+input UpdateProductInput {
+  name: String
+  description: String
+  price: Int
+  quantity: Int
+  isWet: Boolean
+}

@@ -1,0 +1,62 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type MainCategory {
+  id: String!
+  name: String!
+}
+
+type CatDetail {
+  id: Int!
+}
+
+type Cat {
+  id: Int!
+  name: String!
+  intro: String!
+  history: String!
+  products: [Product!]!
+  catDetail: CatDetail!
+}
+
+type Product {
+  id: Int!
+  name: String!
+  description: String!
+  price: Int!
+  isWet: Boolean!
+  quantity: Int!
+  mainCategory: MainCategory!
+  cats: [Cat!]!
+}
+
+type Query {
+  fetchProducts: [Product!]!
+  fetchProduct(productId: Float!): Product!
+  fetchMainCategorys: [MainCategory!]!
+  fetchMainCategory(mainCategoryId: String!): MainCategory!
+}
+
+type Mutation {
+  createProduct(createProductInput: CreateProductInput!): Product!
+  updateProduct(updateProductInput: UpdateProductInput!, productId: Float!): Product!
+  createMainCategory(name: String!): MainCategory!
+  updateMainCategory(updateName: String!, mainCategoryId: String!): String!
+}
+
+input CreateProductInput {
+  name: String!
+  description: String!
+  price: Int!
+  quantity: Int!
+  isWet: Boolean!
+}
+
+input UpdateProductInput {
+  name: String
+  description: String
+  price: Int
+  quantity: Int
+  isWet: Boolean
+}
