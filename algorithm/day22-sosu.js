@@ -21,3 +21,34 @@ function solution(nums) {
 }
 
 solution([1, 2, 3, 4]); // 1
+
+function solution2(nums) {
+  let answer = 0;
+  let index = 0;
+
+  nums.forEach((num1, i) => {
+    index = i + 1;
+    nums.slice(index).forEach(num2 => {
+      index += 1;
+      nums.slice(index).forEach(num3 => {
+        const sum = num1 + num2 + num3;
+        // 홀수일때만 검증
+        let count = 0;
+        if (sum % 2 === 1) {
+          for (let j = 1; j <= sum; j++) {
+            if (sum % j === 0) {
+              count++;
+              if (count > 2) {
+                break;
+              }
+            }
+          }
+          if (count === 2) {
+            answer++;
+          }
+        }
+      });
+    });
+  });
+  return answer;
+}

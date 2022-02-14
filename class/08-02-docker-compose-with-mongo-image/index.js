@@ -5,8 +5,6 @@ import { checkEmail, getTemplate, sendEmail } from './email.js';
 import swaggerUi from 'swagger-ui-express';
 import swaggerJSdoc from 'swagger-jsdoc';
 import { options } from './swagger/config.js';
-import dotenv from 'dotenv';
-dotenv.config();
 
 const app = expressD();
 app.use(expressD.json()); // json 요청 연결시켜줌.

@@ -1,0 +1,118 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  id: String!
+  email: String!
+  phone: String!
+  personal: String!
+  address: String!
+  deletedAt: DateTime
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type MainCategory {
+  id: String!
+  name: String!
+}
+
+type CatDetail {
+  id: String!
+  history: String!
+}
+
+type Cat {
+  id: String!
+  name: String!
+  intro: String!
+  products: [Product!]!
+  catDetail: CatDetail!
+}
+
+type Product {
+  id: String!
+  name: String!
+  description: String!
+  price: Int!
+  isWet: Boolean!
+  quantity: Int!
+  deletedAt: DateTime
+  mainCategory: MainCategory!
+  subCategorys: [SubCategory!]!
+  cats: [Cat!]!
+}
+
+type SubCategory {
+  id: String!
+  name: String!
+  products: [Product!]!
+}
+
+type Query {
+  fetchProducts: [Product!]!
+  fetchProductsAll: [Product!]!
+  fetchProduct(productId: String!): Product!
+  fetchMainCategorys: [MainCategory!]!
+  fetchMainCategory(mainCategoryId: String!): MainCategory!
+  fetchSubCategorys: [SubCategory!]!
+  fetchSubCategory(subCategoryId: String!): SubCategory!
+  fetchUsers: [User!]!
+  fetchUsersAll: [User!]!
+  fetchUser: User!
+}
+
+type Mutation {
+  login(password: String!, userId: String!): String!
+  createProduct(createProductInput: CreateProductInput!): Product!
+  updateProduct(updateProductInput: UpdateProductInput!, productId: String!): Product!
+  deleteProduct(productId: String!): Boolean!
+  restoreProduct(productId: String!): Boolean!
+  createMainCategory(name: String!): MainCategory!
+  updateMainCategory(updateName: String!, mainCategoryId: String!): String!
+  deleteMainCategory(mainCategoryId: String!): Boolean!
+  createSubCategory(name: String!): SubCategory!
+  updateSubCategory(updateName: String!, subCategoryId: String!): String!
+  deleteSubCategory(subCategoryId: String!): Boolean!
+  createUser(createUserInput: CreateUserInput!): User!
+  updateUser(updateUserInput: UpdateUserInput!): User!
+  deleteUser: Boolean!
+}
+
+input CreateProductInput {
+  name: String!
+  description: String!
+  price: Int!
+  quantity: Int!
+  isWet: Boolean!
+  mainCategoryId: String!
+  subCategoryId: [String!]!
+}
+
+input UpdateProductInput {
+  name: String
+  description: String
+  price: Int
+  quantity: Int
+  isWet: Boolean
+}
+
+input CreateUserInput {
+  email: String!
+  password: String!
+  phone: String!
+  personal: String!
+  address: String!
+}
+
+input UpdateUserInput {
+  email: String
+  password: String
+  phone: String
+  personal: String
+  address: String
+}
