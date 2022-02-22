@@ -33,7 +33,7 @@ import { FileModule } from './apis/file/file.module';
       host: 'my_database',
       port: 3306,
       username: 'root',
-      password: '159159',
+      password: 'root',
       database: 'myproject',
       entities: [__dirname + '/apis/**/*.entity.*'],
       synchronize: true,
