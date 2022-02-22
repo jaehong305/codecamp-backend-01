@@ -7,14 +7,20 @@ import { ProductModule } from './apis/product/product.module';
 import { SubCategoryModule } from './apis/subCategory/subCategory.module';
 import { UserModule } from './apis/user/user.module';
 import { ConfigModule } from '@nestjs/config';
-// import { AppController } from './app.controller';
-// import { AppService } from './app.service';
+import { PaymentModule } from './apis/payment/payment.module';
+import { OrderModule } from './apis/order/order.module';
+import { FileModule } from './apis/file/file.module';
+import { ProductImageModule } from './apis/productImage/product.image.module';
 
 @Module({
   imports: [
     AuthModule,
-    ProductModule,
+    FileModule,
     MainCategoryModule,
+    OrderModule,
+    PaymentModule,
+    ProductModule,
+    ProductImageModule,
     SubCategoryModule,
     UserModule,
     ConfigModule.forRoot({
