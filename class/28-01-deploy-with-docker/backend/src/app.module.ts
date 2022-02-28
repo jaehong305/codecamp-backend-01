@@ -9,8 +9,8 @@ import { AuthModule } from './apis/auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { PointTransactionModule } from './apis/pointTransaction/pointTransaction.module';
 import { FileModule } from './apis/file/file.module';
-// import { AppController } from './app.controller';
-// import { AppService } from './app.service';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
 
 @Module({
   imports: [
@@ -27,20 +27,21 @@ import { FileModule } from './apis/file/file.module';
     GraphQLModule.forRoot({
       autoSchemaFile: 'src/common/graphql/schema.gql',
       context: ({ req, res }) => ({ req, res }),
+      playground: false,
     }),
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: '172.19.240.4',
+      host: 'mydatabase.ljh305.shop',
       port: 3306,
       username: 'root',
       password: 'root',
       database: 'myproject',
       entities: [__dirname + '/apis/**/*.entity.*'],
-      synchronize: true,
+      synchronize: false,
       logging: true,
     }),
   ],
-  // controllers: [AppController],
-  // providers: [AppService],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}

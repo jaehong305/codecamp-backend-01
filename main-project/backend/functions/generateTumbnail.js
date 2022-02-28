@@ -8,33 +8,32 @@ const sharp = require('sharp');
  * @param {!Object} context Metadata for the event.
  */
 
-exports.helloGCS = async (event, context) => {
-  // console.log(`event: ${JSON.stringify(event)}`);
-  // console.log(`context: ${JSON.stringify(context)}`);
-  // console.log(event.name);
+exports.generateThumbnail = async (event, context) => {
+  console.log('===================================');
+  console.log(`event: ${JSON.stringify(event)}`);
+  console.log(`context: ${JSON.stringify(context)}`);
+  console.log('===================================');
 
-  if (event.name.includes('thumb')) {
-    return;
-  }
+  if (event.name.includes('thumb/')) return;
 
-  const size = [
-    ['s', 320],
-    ['m', 640],
-    ['l', 1280],
-  ];
-
-  const storage = new Storage().bucket('codecamp-1');
+  const storage = new Storage().bucket(event.bucket);
+  const prefix = event.name.split('/origin/')[0];
+  const postfix = event.name.split('/origin/')[1];
 
   await Promise.all(
-    size.map((e) => {
+    [
+      { size: 320, fname: `${prefix}/thumb/s/${postfix}` },
+      { size: 640, fname: `${prefix}/thumb/m/${postfix}` },
+      { size: 1280, fname: `${prefix}/thumb/l/${postfix}` },
+    ].map((e) => {
       return new Promise((resolve, reject) => {
         storage
           .file(event.name)
           .createReadStream()
-          .pipe(sharp().resize(e[1]))
-          .pipe(storage.file(`thumb/${e[0]}/${event.name}`).createWriteStream())
-          .on('finish', () => resolve(`codecamp-1/thumb/${e[0]}/${event.name}`))
-          .on('error', (error) => reject(error));
+          .pipe(sharp().resize(e.size))
+          .pipe(storage.file(`${e.fname}`).createWriteStream())
+          .on('finish', () => resolve())
+          .on('error', () => reject());
       });
     }),
   );
