@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { CacheModule, Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './apis/auth/auth.module';
@@ -11,6 +11,8 @@ import { PaymentModule } from './apis/payment/payment.module';
 import { OrderModule } from './apis/order/order.module';
 import { FileModule } from './apis/file/file.module';
 import { ProductImageModule } from './apis/productImage/product.image.module';
+import type { RedisClientOptions } from 'redis';
+import * as redisStore from 'cache-manager-redis-store';
 
 @Module({
   imports: [
@@ -32,7 +34,7 @@ import { ProductImageModule } from './apis/productImage/product.image.module';
     }),
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'my_database',
+      host: 'my_database2',
       port: 3306,
       username: 'root',
       password: '159159',
@@ -40,6 +42,11 @@ import { ProductImageModule } from './apis/productImage/product.image.module';
       entities: [__dirname + '/apis/**/*.entity.*'],
       synchronize: true,
       logging: true,
+    }),
+    CacheModule.register<RedisClientOptions>({
+      store: redisStore,
+      url: 'redis://my_redis:6379',
+      isGlobal: true,
     }),
   ],
   // controllers: [AppController],

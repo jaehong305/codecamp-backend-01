@@ -4,7 +4,8 @@ export const checkEmail = email => {
   if (!email) {
     console.log('email을 입력해주세요.');
     return false;
-  } else if (!email.includes('@')) {
+  }
+  if (!email.includes('@')) {
     console.log('email의 형식이 올바르지 않습니다.');
     return false;
   }

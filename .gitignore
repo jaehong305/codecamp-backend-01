@@ -1,3 +1,4 @@
 node_modules
 .env*
 codecamp-341008-f2e13af58904.json
+gcp-bigquery.json

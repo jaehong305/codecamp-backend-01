@@ -6,4 +6,5 @@ COPY ./yarn.lock /my_backend/
 RUN yarn install
 
 COPY . /my_backend/
+RUN yarn build
 CMD yarn start:dev

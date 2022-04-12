@@ -18,7 +18,7 @@ export class AuthService {
     // res.setHeader('Access-Control-Allow-Origin', 'https://myfrontsite.com')
     // res.setHeader(
     //   'Set-Cookie',
-    //   `refreshToken=${refreshToken}; path=/;domain=mybacksite.com; SameSite=None; Secure; httpOnly;`
+    //   `refreshToken=${refreshToken}; path=/; domain=mybacksite.com; SameSite=None; Secure; httpOnly;`
     // )
   }
 

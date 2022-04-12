@@ -43,6 +43,8 @@ type Product {
   isWet: Boolean!
   quantity: Int!
   deletedAt: DateTime
+  createdAt: DateTime!
+  updatedAt: DateTime!
   mainCategory: MainCategory!
   subCategorys: [SubCategory!]!
   cats: [Cat!]!
@@ -87,7 +89,7 @@ type ProductImage {
 type Query {
   fetchMainCategorys: [MainCategory!]!
   fetchMainCategory(mainCategoryId: String!): MainCategory!
-  fetchProducts: [Product!]!
+  fetchProducts(search: String!): [Product!]!
   fetchProductsAll: [Product!]!
   fetchProduct(productId: String!): Product!
   fetchSubCategorys: [SubCategory!]!
@@ -100,6 +102,7 @@ type Query {
 type Mutation {
   login(password: String!, userId: String!): String!
   restoreAccessToken: String!
+  logout: String!
   uploadFile(files: [Upload!]!): [String!]!
   createMainCategory(name: String!): MainCategory!
   updateMainCategory(updateName: String!, mainCategoryId: String!): String!

@@ -4,12 +4,14 @@ import { MainCategory } from 'src/apis/mainCategory/entities/mainCategory.entity
 import { SubCategory } from 'src/apis/subCategory/entities/subCategory.entity';
 import {
   Column,
+  CreateDateColumn,
   DeleteDateColumn,
   Entity,
   JoinTable,
   ManyToMany,
   ManyToOne,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 
 @Entity()
@@ -43,6 +45,14 @@ export class Product {
   @DeleteDateColumn()
   @Field(() => Date, { nullable: true })
   deletedAt?: Date;
+
+  @CreateDateColumn()
+  @Field(() => Date)
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  @Field(() => Date)
+  updatedAt: Date;
 
   @ManyToOne(() => MainCategory, { cascade: true, onDelete: 'CASCADE' })
   @Field(() => MainCategory)
