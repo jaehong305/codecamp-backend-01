@@ -22,6 +22,6 @@ export function getToken(mycount) {
   return result;
 }
 
-export function sendTokenToSMS(myphone, result) {
-  return `${myphone} 번호로 인증번호 ${result}를 전송합니다.`;
+export function sendTokenToSMS(myphone, mytoken) {
+  return `${myphone} 번호로 인증번호 ${mytoken}를 전송합니다.`;
 }

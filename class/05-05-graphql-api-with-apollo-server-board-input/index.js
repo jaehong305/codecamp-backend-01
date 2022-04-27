@@ -23,7 +23,7 @@ const typeDefs = gql`
 
   type Mutation {
     createBoard(createBoardInput: CreateBoardInput!): String
-    createTokenOfPhone(myphoneInput: String!): String
+    createTokenOfPhone(myphone: String!): String
   }
 `;
 
@@ -70,12 +70,12 @@ const resolvers = {
     },
 
     createTokenOfPhone: (_, args) => {
-      if (checkValidationPhone(args.myphoneInput)) {
+      if (checkValidationPhone(args.myphone)) {
         // 2. 핸드폰 토큰 6자리 만들기
         const mytoken = getToken(4);
 
         // 3. 핸드폰번호에 토큰 전송하기
-        return sendTokenToSMS(args.myphoneInput, mytoken);
+        return sendTokenToSMS(args.myphone, mytoken);
       } else {
         return;
       }
