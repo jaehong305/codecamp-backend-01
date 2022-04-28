@@ -83,6 +83,8 @@ app.post('/users', function (req, res) {
 
 // 몽고 DB에 접속
 mongoose.connect('mongodb://my_database:27017/codecamp');
-// 네임 리졸루션: my_database란 이름으로 실행되고 있는 도커컨테이너서비스를 도커컴포즈가 찾아준다.
+// 도커 컨테이너에서 서버가 실행되고있으므로 localhost:27017은 찾을수없다.
+// 네임 리졸루션: my_database란 이름으로 실행되고 있는 도커컨테이너서비스를 도커컴포즈가 묶어놓은 서비스 중에서 찾아준다.
+
 // express 서버 오픈(리슨)
 app.listen(3001);
