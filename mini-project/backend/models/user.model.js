@@ -8,6 +8,11 @@ const userSchema = new mongoose.Schema({
   pwd: String,
   phone: String,
   og: Object,
+  // og: {
+  //   title: String,
+  //   description: String,
+  //   image: String,
+  // },
 });
 
 export const User = mongoose.model('User', userSchema);

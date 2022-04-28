@@ -61,8 +61,7 @@ app.patch('/tokens/phone', async function (req, res) {
 });
 
 app.post('/users', async function (req, res) {
-  const user = req.body.user;
-  const { name, email, personal1, personal2, prefer, pwd, phone } = user;
+  const { name, email, personal1, personal2, prefer, pwd, phone } = req.body.user;
   if (!name || !personal1 || !personal2 || !phone || !prefer || !pwd) {
     res.send('회원정보를 모두 입력해주세요.');
     return;
@@ -90,7 +89,9 @@ app.post('/users', async function (req, res) {
         title: og.title,
         description: og.description,
         image: og.image,
+        // ...og
       },
+      // og
     }).save();
     myphone.isAuth = false;
     await myphone.save();
