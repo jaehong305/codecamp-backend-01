@@ -9,10 +9,10 @@ class Monster {
     this.power = aaa;
   }
 
-  attack = () => {
+  attack() {
     console.log('공격하자');
     console.log('내 공격력은 ' + this.power);
-  };
+  }
 
   run = () => {
     console.log('도망가자!!');

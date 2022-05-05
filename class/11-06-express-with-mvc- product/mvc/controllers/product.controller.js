@@ -8,6 +8,7 @@ export class ProductController {
 
     const productService = new ProductService();
     const isSoldout = productService.checkSoldout();
+
     // 3. 상품 구매하는 코드
     if (hasMoney && !isSoldout) {
       res.send('상품을 구매합니다.');
@@ -17,6 +18,7 @@ export class ProductController {
   refundProduct = (req, res) => {
     const productService = new ProductService();
     const isSoldout = productService.checkSoldout();
+
     // 2. 상품 환불하는 코드
     if (isSoldout) {
       res.send('상품을 환불합니다.');
