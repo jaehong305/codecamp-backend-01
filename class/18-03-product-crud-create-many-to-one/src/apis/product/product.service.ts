@@ -88,8 +88,8 @@ export class ProductService {
 
     return await this.productRepository.save({
       ...product,
-      productSaleslocation: result, // {id: result.id}
-      productCategory: result2,
+      productSaleslocation: result, // {id: result.id} // id만 안넣어주고 result를 넣어주면 돌려줄때 정보 같이 돌려줌.
+      productCategory: result2, // {id: productCategoryId} // 존재 체크후 아이디만 넣어줘도 상관x 하지만 정보없어서 리턴 에러. 리턴 필요없으면 아이디만 등록하는게 효율적.
     });
   }
 

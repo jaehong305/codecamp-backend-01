@@ -52,7 +52,7 @@ export class Product {
   productSaleslocation: ProductSaleslocation;
 
   // @JoinColumn() Many는 생략가능 One으로 시작은 조인명시
-  @ManyToOne(() => ProductCategory, { cascade: true, onDelete: 'CASCADE' })
+  @ManyToOne(() => ProductCategory, { cascade: true, onDelete: 'CASCADE' }) // 카테고리를 삭제하면 연결되어있는 상품까지 다 삭제된다.
   @Field(() => ProductCategory)
   productCategory: ProductCategory;
 

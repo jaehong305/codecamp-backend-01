@@ -99,7 +99,7 @@ export class ProductService {
     // await this.productRepository.softRemove({ id: productId }) // id로만 삭제가능
     //
     // 5. 소프트삭제 - TypeORM 제공2
-    const result = await this.productRepository.softDelete({ id: productId }); // 다양한 조건으로 삭제 가능
-    return result.affected ? true : false;
+    const result = await this.productRepository.softDelete({ id: productId }); // 다양한 조건으로 여러행 삭제 가능
+    return result.affected ? true : false; // affected에는 삭제된 행의 갯수가 숫자로 담겨있다.
   }
 }
