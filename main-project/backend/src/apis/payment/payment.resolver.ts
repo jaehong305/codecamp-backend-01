@@ -21,7 +21,6 @@ export class PaymentResolver {
     @Args('orderId') orderId: string,
   ) {
     const accessToken = await this.iamprotService.getToken();
-
     await this.iamprotService.checkpaid({
       impUid,
       amount,
@@ -57,12 +56,7 @@ export class PaymentResolver {
     @Args('impUid') impUid: string,
     @CurrentUser() currentUser: ICurrentUser,
   ) {
-    // const payment = await this.paymentService.findOneByOrderId({ orderId });
-    // if (payment.status === 'CANCEL') {
-    //   throw new UnprocessableEntityException('이미 취소된 결제입니다.');
-    // }
     await this.paymentService.checkAlreadyCanceled({ impUid });
-
     await this.paymentService.checkUser({ impUid, currentUser, orderId });
 
     // const { impUid, amount } = payment;

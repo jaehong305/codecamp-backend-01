@@ -11,7 +11,7 @@ export class AuthService {
       { secret: 'myRefreshKey1234', expiresIn: '2w' },
     );
 
-    // 개발환경
+    // 개발환경 // 프론트에서도 request credential: include 해줘야 받을 수 있다.
     res.setHeader('Set-Cookie', `refreshToken=${refreshToken}`);
 
     // 배포환경

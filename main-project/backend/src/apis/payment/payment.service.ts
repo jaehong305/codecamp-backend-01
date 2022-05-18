@@ -60,12 +60,6 @@ export class PaymentService {
         order,
         status: PAYMENT_STATUS_ENUM.CANCEL,
       });
-      // const cancelPayment = await this.create({
-      //   impUid,
-      //   amount: -amount,
-      //   orderId,
-      //   status: PAYMENT_STATUS_ENUM.CANCEL,
-      // });
       await queryRunner.manager.save(cancelPayment);
       await queryRunner.commitTransaction();
       return cancelPayment;

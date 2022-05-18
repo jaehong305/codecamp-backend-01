@@ -3,10 +3,7 @@ import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import { GqlAuthAccessGuard } from 'src/common/auth/gql-auth.guard';
 import { CurrentUser, ICurrentUser } from 'src/common/auth/gql-user.param';
 import { IamportService } from '../iamport/iamport.service';
-import {
-  PointTransaction,
-  POINT_TRANSACTION_STATUS_ENUM,
-} from './entities/pointTransaction.entity';
+import { PointTransaction } from './entities/pointTransaction.entity';
 import { PointTransactionService } from './pointTransaction.service';
 
 @Resolver()
@@ -48,7 +45,7 @@ export class PointTransactionResolver {
     // 1. 이미 취소된 건인지 확인
     await this.pointTransactionService.checkAlreadyCanceled({ impUid });
 
-    // 2. 취소하기에 충분한 내 포인트 잔액이 남아있는지
+    // 2. 취소하기에 충분한 내 포인트 잔액이 남아있는지 + 자신의 결제내역이 있는지 확인
     await this.pointTransactionService.checkHasCancelablePoint({
       impUid,
       currentUser,
