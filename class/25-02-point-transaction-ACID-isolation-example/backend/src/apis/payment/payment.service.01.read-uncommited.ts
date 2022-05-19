@@ -37,6 +37,7 @@ export class PaymentService {
     await queryRunner.connect();
     await queryRunner.startTransaction('READ UNCOMMITTED');
     try {
+      // 만약 5초 이내에 조회하면, 위에서 등록한 금액(커밋되지 않은 금액)이 조회됨
       const payment = await queryRunner.manager.find(Payment);
       await queryRunner.commitTransaction();
       return payment;

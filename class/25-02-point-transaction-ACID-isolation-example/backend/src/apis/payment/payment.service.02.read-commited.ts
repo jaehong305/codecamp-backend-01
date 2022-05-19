@@ -15,7 +15,7 @@ export class PaymentService {
   async findAll() {
     const queryRunner = await this.connection.createQueryRunner();
     await queryRunner.connect();
-    await queryRunner.startTransaction('READ COMMITTED'); // Non-Repeatable-Read => 한 트랜잭션에서 조회값이 다르게 나옴.
+    await queryRunner.startTransaction('READ COMMITTED'); // Non-Repeatable-Read => 한 트랜잭션에서 반복된 조회시 커밋된 데이터들의 조회값이 다르게 나옴.
     try {
       // 하나의 트랜잭션 내에서 500원이 조회됐으면,
       // 해당트랜잭션이 끝나기 전까지는(커밋 전까지는) 다시 조회하더라도 항상 500원이 조회(Repeatable-Read) 되어야 함.

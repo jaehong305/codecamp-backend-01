@@ -28,8 +28,6 @@ export class PaymentService {
         await queryRunner.commitTransaction();
       }, 5000);
       return payment;
-
-      // await queryRunner.commitTransaction();
     } catch (error) {
       await queryRunner.rollbackTransaction();
     } finally {
