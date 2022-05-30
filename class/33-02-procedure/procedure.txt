@@ -1,3 +1,6 @@
+# 프로시저 목록
+show procedure status;
+
 # 프로시저 삭제(기존에 만들어져 있다면 삭제하고 다시 만들기)
 drop procedure mydummydata;
 
@@ -11,8 +14,5 @@ begin
     end while;
 end;
 
-# 프로시저 목록
-show procedure status;
-
-# 프로시저 실행
+# 프로시저 실행(난수 더미데이터 천만개 생성)
 call mydummydata();

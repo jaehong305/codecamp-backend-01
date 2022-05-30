@@ -1,46 +1,23 @@
 # 데이터 전체 갯수 확인
-select COUNT(*) from board;
+SELECT count(*)
+from board;
 
-
-# 쿼리 검색 속도 비교
-select * 
-  from board
- where title = '0.011179305623452464'
-;
-select *
-  from board
- where number = 24
-;
-
-
-# 옵티마이저 실행계획 확인
+# 옵티마이저의 실행계획 보기(type: ALL(pull scan) / const(pk fk unique 자동생성 인덱스로 스캔 - 가장빠름) / ref(직접만든 인덱스로 스캔) / range(> < 범위 스캔))
 explain
- select * 
-   from board
-  where title = '0.011179305623452464'
-;
+SELECT *
+from board b 
+WHERE title = '0.4051270609769291';
+
 explain
- select *
-   from board
-  where number = 24
-;
+SELECT *
+from board b 
+WHERE number = 101;
 
-
-# 인덱스 확인
+# 인덱스 목록
 show index from board;
 
-
-# 인덱스 생성
+# 인덱스 생성 (인덱스 생성시 DB가 검색에 용이하도록 정렬해주므로 대신 삽입이 느려진다. 따라서 where절에 자주 들어가는 컬럼에 걸어주어야한다.)
 create index idx_title on board(title);
-
-
-# 인덱스 생성 후, 옵티마이저 실행계획 재확인
-explain
- select *
-   from board
-  where title = '0.011179305623452464'
-;
-
 
 # 인덱싱된 컬럼으로 재쿼리 후, 성능 비교
 select * 
