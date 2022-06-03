@@ -23,7 +23,7 @@ export class ProductResolver {
     // });
     // console.log(JSON.stringify(result, null, ' '));
 
-    // 엘라스틱서치에서 등록해보기 위해 임시로 주석
+    // 엘라스틱서치에서 조회해보기 위해 임시로 주석
     return await this.productService.findAll();
   }
 

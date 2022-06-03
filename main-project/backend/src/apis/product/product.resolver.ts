@@ -18,11 +18,12 @@ export class ProductResolver {
 
   @Query(() => [Product])
   async fetchProducts(@Args('search') search: string) {
-    const redisResult = await this.cacheManager.get(search);
-    console.log('r', redisResult);
-    if (redisResult) return redisResult;
+    // 1. 레디스에 캐시되어 있는지 확인
+    const productsCache = await this.cacheManager.get(`products:${search}`);
+    if (productsCache) return productsCache;
 
-    const elasticResult = await this.elasticsearchService.search({
+    // 2. 레디스에 캐시가 되어있지 않다면, 엘라스틱서치에서 유저가 검색한 검색어로 조회하기
+    const result = await this.elasticsearchService.search({
       index: 'myproduct',
       query: {
         match: {
@@ -31,17 +32,18 @@ export class ProductResolver {
       },
     });
     // console.log(JSON.stringify(elasticResult, null, ' '));
-    const elasticObj = elasticResult.hits.hits.map((e) => {
-      const obj = JSON.parse(JSON.stringify(e._source));
-      const obj2 = {};
-      for (let key in obj) {
-        if (!key.includes('@')) obj2[key] = obj[key];
-      }
-      return obj2;
-    });
-    console.log('e', elasticObj); // 대소문자 구분 x 문제
-    await this.cacheManager.set(search, elasticObj, { ttl: 0 });
-    return elasticObj;
+
+    const products = result.hits.hits.map((e) => ({      
+      id: e._source.id,
+      name: e._source.name,
+      price: e._source.price,      
+    }));
+    // console.log('e', elasticObj); // 대소문자 구분 x 문제
+
+    // 3. 엘라스틱서치에서 조회 결과가 있다면, 레디스에 검색결과 캐싱
+    await this.cacheManager.set(`products:${search}`, products, { ttl: 0 });
+
+    return products;
     // return await this.productService.findAll();
   }
 
