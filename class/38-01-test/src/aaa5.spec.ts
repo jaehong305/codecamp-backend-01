@@ -17,7 +17,7 @@ describe('AppController', () => {
       controllers: [AppController],
       providers: [
         {
-          provide: AppService,
+          provide: AppService, // 커스텀 프로바이더
           useClass: MockAppService, // 나만의 AppService 주입하기
         },
       ],

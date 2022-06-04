@@ -16,7 +16,6 @@ class MockUserRepository {
   ];
 
   findOne({ email }) {
-    // const email = this.mydb.find(el => el.email === email)
     const users = this.mydb.filter((el) => el.email === email);
     return users.length ? users[0] : null;
   }
@@ -36,11 +35,12 @@ class MockUserRepository {
 //   name: '철수';
 //   age: 13;
 // }
+// // keyof는 키들만 뽑아낸다. // 두개가 같은 의미
+// const qqq: keyof Iprofile = 'name';
+// const www: 'name' | 'age' = 'age';
 
-// const qqq: keyof Iprofile = '';
-// const www: 'name' | 'age' = '';
-
-type MockRepository<T = any> = Partial<Record<keyof Repository<T>, jest.Mock>>;
+// 제너릭으로 들어올때 타입정해짐, 원본 Repository타입에서 키만 뽑아냄, 각각을키로해서 해당타입을 value(가짜밸류)로 붙여주고, 모두 옵셔널로 바꿈.
+type MockRepository<T = any> = Partial<Record<keyof Repository<T>, jest.Mock>>; // 가찌 타입생성
 
 describe('UserService', () => {
   let userService: UserService;
@@ -65,7 +65,7 @@ describe('UserService', () => {
 
   describe('create', () => {
     it('이미 존재하는 이메일 검증하기!!', async () => {
-      const userRepositorySpyFindOne = jest.spyOn(userRepository, 'findOne');
+      const userRepositorySpyFindOne = jest.spyOn(userRepository, 'findOne'); // 몇번실행했는지 스파이가 추적
       const userRepositorySpySave = jest.spyOn(userRepository, 'save');
 
       const myData = {
@@ -98,6 +98,7 @@ describe('UserService', () => {
       const result = await userService.create({ ...myData });
       expect(result).toStrictEqual(myData);
 
+      // 1번씩 실행이 기대됨
       expect(userRepositorySpyFindOne).toBeCalledTimes(1);
       expect(userRepositorySpySave).toBeCalledTimes(1);
     });

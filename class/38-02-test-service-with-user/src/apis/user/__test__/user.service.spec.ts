@@ -72,7 +72,7 @@ describe('UserService', () => {
         age: 13,
       };
       const result = await userService.create({ ...myData });
-      expect(result).toStrictEqual(myData);
+      expect(result).toStrictEqual(myData); // 객체비교
     });
   });
 
