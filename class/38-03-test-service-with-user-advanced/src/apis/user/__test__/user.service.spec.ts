@@ -39,7 +39,7 @@ class MockUserRepository {
 // const qqq: keyof Iprofile = 'name';
 // const www: 'name' | 'age' = 'age';
 
-// 제너릭으로 들어올때 타입정해짐, 원본 Repository타입에서 키만 뽑아냄, 각각을키로해서 해당타입을 value(가짜밸류)로 붙여주고, 모두 옵셔널로 바꿈.
+// 제너릭으로 들어올때 타입정해짐, 원본 Repository타입에서 키만 뽑아냄, 뽑아낸 각각을 키값 타입으로해서 해당타입을 value(가짜밸류)값 타입으로 붙여주고, 모두 옵셔널로 바꿈.
 type MockRepository<T = any> = Partial<Record<keyof Repository<T>, jest.Mock>>; // 가찌 타입생성
 
 describe('UserService', () => {

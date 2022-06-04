@@ -23,6 +23,6 @@ type Mytype3 = Pick<IProfile, "name" | "age">;
 // 4. Omit 타입 => 일부만 제외하고 뽑아내기
 type Mytype4 = Omit<IProfile, "school">;
 
-// 5. Record 타입 => ZZZ를 key로 IProfile을 value로(타입)
+// 5. Record 타입 => ZZZ를 key값 타입으로 IProfile을 value타입으로
 type ZZZ = "aaa" | "qqq" | "rrr";
 type Mytype6 = Record<ZZZ, IProfile>;
