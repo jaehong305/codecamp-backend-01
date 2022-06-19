@@ -8,5 +8,10 @@ function bigNum(str) {
   console.log(biggest);
 }
 
-bigNum('12345'); // 5
-bigNum('87135'); // 8
+function bigNum2(str) {
+  const numArray = str.split("").map((e) => +e);
+  return Math.max(...numArray);
+}
+
+bigNum("12345"); // 5
+bigNum("87135"); // 8
